@@ -1,23 +1,10 @@
 # Secure Azure Machine Learning Architecture Guide
 
 ## Reference Architecture Diagram
-```mermaid
-graph TD
-    subgraph Secured Virtual Network
-        A[Azure Machine Learning Workspace] --> B[Private Endpoint]
-        B --> C[Azure Key Vault]
-        B --> D[Azure Storage Account]
-        B --> E[Azure Container Registry]
-        F[Managed Compute Cluster] -->|VNet Injection| G[GPU Nodes]
-        H[AKS Inference Cluster] -->|Private Network| I[Scoring Endpoints]
-    end
 
-    J[Data Scientist] -->|VPN/Private Link| A
-    K[MLOps Pipeline] -->|Service Principal| A
-    L[Audit System] -->|Log Analytics| M[Security Dashboard]
-    A -->|Encrypted Traffic| N[Azure Monitor]
-    C -->|CMK Encryption| D
-```
+![Reference Architecture](https://github.com/mhartson310/Azure-Machine-Learning-Solutions/blob/main/docs/AZURE%20DEVSECOPS.png)
+
+
 
 ## Compliance Control Mapping
 
