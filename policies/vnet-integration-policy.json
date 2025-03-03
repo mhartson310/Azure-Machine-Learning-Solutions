@@ -1,0 +1,39 @@
+{
+    "properties": {
+        "displayName": "[AML] Enforce VNet Integration",
+        "policyType": "Custom",
+        "mode": "Indexed",
+        "metadata": {
+            "category": "Machine Learning",
+            "version": "1.0.0"
+        },
+        "parameters": {
+            "effect": {
+                "type": "String",
+                "defaultValue": "Deny",
+                "allowedValues": ["Audit", "Deny", "Disabled"]
+            }
+        },
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.MachineLearningServices/workspaces"
+                    },
+                    {
+                        "field": "Microsoft.MachineLearningServices/workspaces/publicNetworkAccess",
+                        "notEquals": "Disabled"
+                    },
+                    {
+                        "field": "Microsoft.MachineLearningServices/workspaces/v1LegacyMode",
+                        "notEquals": "Disabled"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "[parameters('effect')]"
+            }
+        }
+    }
+}
